@@ -23,7 +23,7 @@ const singUp = async (req, res, next) => {
 
 const singIn = async (req, res, next) => {
     try {
-        const user = await User.findOne({ name: req.body.name, password })
+        const user = await User.findOne({ name: req.body.name })
 
         if (!user) {
             return next(createError(404, "User not found"))
