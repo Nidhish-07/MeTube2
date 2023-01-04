@@ -1,9 +1,12 @@
 const express = require('express')
-const comment = require("../controllers/comment")
+import { addComment, deleteComment, getComment } from "../controllers/comment"
+const { verifyToken } = require('../verifyToken')
 
 const router = express.Router()
 
-router.get("/", comment)
+router.post("/", verifyToken, addComment)
+router.delete("/:id", verifyToken, deleteComment)
+router.get("/:videoId", verifyToken, getComment)
 
 
 module.exports = router

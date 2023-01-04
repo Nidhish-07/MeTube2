@@ -1,6 +1,36 @@
+import createError from "../error.js"
+import Comment from "../models/Comment.js"
+import Video from "../models/Video.js"
 
-const text = (req, res) => {
-    res.json("Successful")
+export const addComment = async (req, res, next) => {
+    const newComment = new Comment({ userId: req.user.id, ...req.body })
+    try {
+        const savedComment = await newComment.save()
+        res.status(200).json(savedComment)
+    } catch (error) {
+        next(error)
+    }
 }
-
-module.exports = text
+export const deleteComment = async (req, res, next) => {
+    try {
+        const comment = await Comment.findById(req.params.id)
+        const video = await Video.findById(req.params.id)
+        if (comment.userId === req.user.id || req.user.id === video.userId) {
+            await Comment.findByIdAndDelete(req.params.id)
+            return res.status(200).json("Comment has been deleted")
+        }
+        else {
+            next(createError(403, "You cannot delete this comment"))
+        }
+    } catch (error) {
+        next(error)
+    }
+}
+export const getComment = async (req, res, next) => {
+    try {
+        const comments = await Comment.find({ videoId: req.params.videoId })
+        res.status(200).json(comments)
+    } catch (error) {
+        next(error)
+    }
+}
