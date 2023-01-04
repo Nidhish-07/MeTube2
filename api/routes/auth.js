@@ -1,12 +1,12 @@
 const express = require('express')
-const { singUp, singIn } = require("../controllers/auth")
+const { register, login } = require("../controllers/auth")
 
 
 const router = express.Router()
 
-router.post("/signup", singUp)
+router.post("/register", register)
 
-router.post("/signin", singIn)
+router.post("/login", login)
 
 router.post("/google",)
 

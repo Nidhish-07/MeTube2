@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+
 const User = require("../models/User")
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken')
@@ -6,9 +6,9 @@ const jwt = require('jsonwebtoken')
 
 const createError = require('../error')
 
-const singUp = async (req, res, next) => {
+const register = async (req, res, next) => {
     try {
-        const salt = bcrypt.genSaltSync(10)
+        const salt = bcrypt.genSaltSync(8)
         const hash = bcrypt.hashSync(req.body.password, salt)
 
         const user = new User({ ...req.body, password: hash })
@@ -16,22 +16,22 @@ const singUp = async (req, res, next) => {
         await user.save()
         res.status(200).send("User has been created")
     } catch (error) {
+        // next(createError(error))
         next(error)
-        // createError(404, "Not found")
     }
 }
 
-const singIn = async (req, res, next) => {
+const login = async (req, res, next) => {
     try {
-        const user = await User.findOne({ name: req.body.name })
+        const user = await User.findOne({ username: req.body.username })
 
         if (!user) {
             return next(createError(404, "User not found"))
         }
 
-        const isCorrect = bcrypt.compareSync(req.body.password, user.password)
+        const validPassword = bcrypt.compareSync(req.body.password, user.password)
 
-        if (!isCorrect) {
+        if (!validPassword) {
             return next(createError(400, "Wrong Credentials"))
         }
 
@@ -43,8 +43,8 @@ const singIn = async (req, res, next) => {
 
 
     } catch (error) {
-        console.log(error);
+        next(error)
     }
 }
 
-module.exports = { singUp, singIn }
+module.exports = { register, login }

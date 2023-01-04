@@ -1,10 +1,10 @@
 const express = require("express")
 const mongoose = require("mongoose")
 require('dotenv').config()
-const UserRoute = require("./routes/users")
-const CommentRoute = require("./routes/comments")
-const VideoRoute = require("./routes/videos")
-const AuthRoute = require("./routes/auth")
+const userRoute = require("./routes/users")
+const commentRoute = require("./routes/comments")
+const videoRoute = require("./routes/videos")
+const authRoute = require("./routes/auth")
 const cookieParser = require("cookie-parser")
 
 const app = express()
@@ -22,10 +22,10 @@ const connect = async () => {
 
 app.use(cookieParser())
 app.use(express.json())
-app.use("/api/auth", AuthRoute)
-app.use("/api/users", UserRoute)
-app.use("/api/videos", UserRoute)
-app.use("/api/comments", UserRoute)
+app.use("/api/auth", authRoute)
+app.use("/api/users", userRoute)
+app.use("/api/videos", videoRoute)
+app.use("/api/comments", commentRoute)
 
 app.use((err, req, res, next) => {
    const status = err.status || 500
