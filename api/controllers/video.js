@@ -99,5 +99,23 @@ export const subVideo = async (req, res, next) => {
         next(error)
     }
 }
+export const getByTagVideo = async (req, res, next) => {
+    const tags = req.query.tags.split(',')
+    try {
+        const videos = await User.find({ tags: { $in: tags } }).limit(20)
+        res.status(200).json(videos)
+    } catch (error) {
+        next(error)
+    }
+}
+export const searchVideo = async (req, res, next) => {
+    const query = req.query.q
+    try {
+        const videos = await User.find({ title: { $regex: query, $options: "i" } }).limit(30)
+        res.status(200).json(videos)
+    } catch (error) {
+        next(error)
+    }
+}
 
 

@@ -11,7 +11,9 @@ router.get("/find/:id", getVideo)
 router.put("/view/:id", addView)
 router.get("/trend/:id", trendingVideo)
 router.get("/random", randomVideo)
-router.get("/subscribe",verifyToken, subVideo)
+router.get("/sub",verifyToken, subVideo)
+router.get("/tags",verifyToken, subVideo)
+router.get("/search",verifyToken, subVideo)
 
 
 module.exports = router
