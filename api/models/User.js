@@ -24,7 +24,7 @@ const UserSchema = mongoose.Schema({
         default: 0,
 
     },
-    subscribeUsers: {
+    subscribedUsers: {
         type: [String]
     }
 }, { timestamp: true })

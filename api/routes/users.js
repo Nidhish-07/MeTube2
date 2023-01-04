@@ -5,12 +5,12 @@ const { verifyToken } = require('../verifyToken')
 const router = express.Router()
 
 router.put("/:id", verifyToken, updateUser)
-router.delete("/:id", deleteUser)
-router.put("/find/:id", getUser)
-router.put("/sub/:id", subscribe)
-router.put("/unsub/:id", unsubscribe)
-router.put("/like/:videoId", like)
-router.put("/dislike/:videoId", dislike)
+router.delete("/:id",verifyToken, deleteUser)
+router.get("/find/:id", getUser)
+router.put("/sub/:id",verifyToken, subscribe)
+router.put("/unsub/:id", verifyToken,unsubscribe)
+router.put("/like/:videoId",verifyToken, like)
+router.put("/dislike/:videoId",verifyToken, dislike)
 
 
 module.exports = router
