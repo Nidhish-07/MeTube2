@@ -65,10 +65,21 @@ const unsubscribe = async (req, res, next) => {
     }
 }
 const like = async (req, res, next) => {
+    try {
+        await Video.findByIdAndUpdate(req.params.videoId, { $addToSet: { likes: req.user.id }, $pull: { dislikes: req.user.id } })
+        res.status(200).json("Video liked")
+    } catch (error) {
+        next(error)
+    }
 
 }
 const dislike = async (req, res, next) => {
-
+    try {
+        await Video.findByIdAndUpdate(req.params.videoId, { $addToSet: { dislikes: req.user.id }, $pull: { likes: req.user.id } })
+        res.status(200).json("Video disliked")
+    } catch (error) {
+        next(error)
+    }
 }
 
 module.exports = { updateUser, deleteUser, getUser, subscribe, unsubscribe, like, dislike }
