@@ -1,18 +1,36 @@
-import React from 'react'
-import Menu from './components/Menu'
-import NavBar from './components/NavBar'
-import styles from "./App.module.scss"
+import React from "react";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import Menu from "./components/Menu";
+import NavBar from "./components/NavBar";
+import Home from "./pages/Home";
+import Video from "./pages/Video";
 
+// const Dashboard=()=>{
+//   return{
+//     <NavBar/>
+//   }
+// }
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+    index:true
+  },
+  { path: "/video/:id", element: <Video></Video> },
+]);
 const App = () => {
   return (
-    <div className={styles.container}>
+    <div className="flex">
       <Menu></Menu>
-      <div className={styles.main}>
+      <div className="flex-[7]">
         <NavBar></NavBar>
-        <div className={styles.wrapper}>Videos</div>
+        <div>
+          <RouterProvider router={router}></RouterProvider>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
