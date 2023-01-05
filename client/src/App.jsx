@@ -1,6 +1,6 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Menu from "./components/Menu";
+import Menu from "./components/Sidebar";
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Video from "./pages/Video";
