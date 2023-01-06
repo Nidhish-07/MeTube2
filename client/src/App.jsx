@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <Home />,
     index: true
   },
-  { path: "/video/:id", element: <div className="py-5 px-24"> <Video></Video></div> },
+  { path: "/video/", children: [{ path: "/video/:id", element: <div className="py-5 px-24"> <Video></Video></div> }] },
 ]);
 const App = () => {
   return (

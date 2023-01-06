@@ -1,7 +1,10 @@
 import React from 'react'
+import  {Link} from "react-router-dom"
 
 const Card = () => {
     return (
+        <Link to={"/video/test"} className>
+
         <div className='cursor-pointer mb-11 w-[360px]'>
             <img src="https://source.unsplash.com/random?video" alt="video" className='w-full h-52 bg-slate-600' />
             <div className='flex mt-4 gap-3'>
@@ -13,6 +16,7 @@ const Card = () => {
                 </div>
             </div>
         </div>
+        </Link>
     )
 }
 
