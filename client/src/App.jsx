@@ -15,9 +15,9 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
-    index:true
+    index: true
   },
-  { path: "/video/:id", element: <Video></Video> },
+  { path: "/video/:id", element: <div className="py-5 px-24"> <Video></Video></div> },
 ]);
 const App = () => {
   return (
